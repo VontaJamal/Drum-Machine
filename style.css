@@ -17,17 +17,17 @@ body {
 }
 
 .wrapper {
-  background-color: cyan;
+  background: #2f2f2f;
   width: 80%;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-flow: row wrap;
 }
 
 .keyContainer {
-  border: green 1px dashed;
   display: flex;
   flex: 1;
   flex-flow: row wrap;
@@ -36,18 +36,37 @@ body {
 }
 
 .key {
-  border: red 1px solid;
-  border: 0.4rem solid black;
+  border: 0.4rem solid #fdfdfd;
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem 0.5rem;
   font-size: 1.5rem;
   text-align: center;
-  color: black;
+  color: #fdfdfd;
+  width: 30%;
+  transition: all 0.07s ease;
 }
 
 kbd {
   display: block;
+}
+
+.playing {
+  color: #ff0000;
+  border-color: #ff0000;
+  transform: scale(1.1);
+  box-shadow: 0 0 1rem #fdfdfd;
+}
+
+.controls {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fdfdfd;
+
+.play:hover,
+.reset:hover {
+  cursor: pointer;
 }
 
 /* Small devices (tablets, 768px and up) */

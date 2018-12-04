@@ -15,14 +15,20 @@
   <body>
     <div class="wrapper">
       <div class="keyContainer">
-        <div data-key="65" class="key"><kbd>A</kbd> <span>sound</span></div>
-        <div data-key="83" class="key"><kbd>S</kbd> <span>sound</span></div>
-        <div data-key="68" class="key"><kbd>D</kbd> <span>sound</span></div>
+        <div data-key="65" class="key"><kbd>A</kbd> <span>Boom</span></div>
+        <div data-key="83" class="key"><kbd>S</kbd> <span>Clap</span></div>
+        <div data-key="68" class="key"><kbd>D</kbd> <span>Hihat</span></div>
+        <div data-key="70" class="key"><kbd>F</kbd> <span>Kick</span></div>
+        <div class="controls">
+          Playback: <span class="play">🥁</span>
+          <span class="reset">Reset</span>
+        </div>
       </div>
 
       <audio data-key="65" src="sounds/boom.wav"></audio>
       <audio data-key="83" src="sounds/clap.wav"></audio>
       <audio data-key="68" src="sounds/hihat.wav"></audio>
+      <audio data-key="70" src="sounds/kick.wav"></audio>
     </div>
     <script src="index.js"></script>
   </body>
