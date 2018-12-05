@@ -17,7 +17,7 @@ body {
 }
 
 .wrapper {
-  background: #2f2f2f;
+  background: #080808;
   width: 80%;
   margin: 0 auto;
   min-height: 100vh;
@@ -52,8 +52,6 @@ kbd {
 }
 
 .playing {
-  color: #ff0000;
-  border-color: #ff0000;
   transform: scale(1.1);
   box-shadow: 0 0 1rem #fdfdfd;
 }
@@ -67,8 +65,49 @@ kbd {
 
 .play:hover,
 .reset:hover,
-.record:hover {
+.record:hover,
+.loop:hover {
   cursor: pointer;
+}
+
+.loop {
+  display: inline-block;
+  transition: color 0.3s ease-in-out;
+  color: #fdfdfd;
+  font-size: 0.8em;
+}
+
+.looping {
+  color: #1cbd55;
+  transform: rotate(180deg);
+  -webkit-animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-moz-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .recordText {
