@@ -63,10 +63,16 @@ kbd {
   text-align: center;
   font-size: 1.5rem;
   color: #fdfdfd;
+}
 
 .play:hover,
-.reset:hover {
+.reset:hover,
+.record:hover {
   cursor: pointer;
+}
+
+.recordText {
+  display: inline-block;
 }
 
 /* Small devices (tablets, 768px and up) */
