@@ -7,11 +7,27 @@ const resetButton = document.querySelector(".reset");
 const recordButton = document.querySelector(".record");
 const loopButton = document.querySelector(".loop");
 const recordTime = document.querySelector(".recordTime");
+let isPlaying = false;
 let isRecording = false;
 let isLooping = false;
 let updateTime;
+let now;
+let last;
+let time;
 
-window.addEventListener("keydown", playSound);
+window.addEventListener("keydown", function(e) {
+  now = Date.now();
+
+  if (last) {
+    time = now - last;
+  } else {
+    time = 0;
+  }
+
+  last = now;
+  playSound(e, time);
+});
+
 playButton.addEventListener("click", playRecording);
 resetButton.addEventListener("click", clearRecording);
 recordButton.addEventListener("click", record);
@@ -61,26 +77,51 @@ function playRecording() {
   //check if we have recorded sounds
   if (sounds.length > 0) {
     isRecording = false;
+    isPlaying = !isPlaying;
+
     let start = 0;
     let counter = 0;
 
-    updateTime = setInterval(function count() {
-      counter++;
-      formatCount(counter);
-    }, 1000);
+    if (isPlaying) {
+      updateTime = setInterval(function count() {
+        counter++;
+        formatCount(counter);
+      }, 1000);
 
-    playSound(sounds[start]);
+      let sound = sounds[start].audio;
 
-    sounds[start].addEventListener("ended", function soundPlayer() {
-      playNextSound(start + 1);
+      playSound(sound);
+      let next = ++start;
 
-      sounds[start].removeEventListener("ended", soundPlayer);
-    });
+      setTimeout(function() {
+        playNextSound(next);
+      }, sounds[next].time);
+
+      // sound.addEventListener("ended", function soundPlayer() {
+      //   playNextSound(start + 1);
+
+      //   sound.removeEventListener("ended", soundPlayer);
+      // });
+    }
   }
 }
 
 function clearRecording() {
   sounds.length = 0;
+}
+
+function stopPlaying() {
+  clearInterval(updateTime);
+  isPlaying = false;
+  setTimeout(function updateText() {
+    recordTime.innerHTML = "Recording Finished!";
+
+    setTimeout(function resetTime() {
+      recordTime.innerHTML = "0:00";
+    }, 1000);
+  }, 1000);
+
+  return;
 }
 
 function formatCount(seconds) {
@@ -100,7 +141,7 @@ function formatCount(seconds) {
   }
 }
 
-function playSound(e) {
+function playSound(e, time) {
   let audio, player;
 
   if (e) {
@@ -120,35 +161,50 @@ function playSound(e) {
   audio.play();
 
   if (isRecording) {
-    sounds.push(audio);
+    const sound = {
+      audio,
+      time
+    };
+    sounds.push(sound);
   }
 }
 
 function playNextSound(index) {
-  //recording has finished
-  if (!sounds[index]) {
-    if (isLooping) {
-      index = 0;
+  if (isPlaying) {
+    let sound = sounds[index].audio;
+    playSound(sound);
+    let next = ++index;
+    if (sounds[next]) {
+      setTimeout(function() {
+        playNextSound(index);
+      }, sounds[next].time);
     } else {
-      clearInterval(updateTime);
-      setTimeout(function resetTime() {
-        recordTime.innerHTML = "Recording Finished!";
+      if (isLooping) {
+        index = 0;
+        playSound(sound);
+        let next = ++index;
 
-        setTimeout(function resetTime() {
-          recordTime.innerHTML = "0:00";
-        }, 1000);
-      }, 1000);
-
-      return;
+        setTimeout(function() {
+          playNextSound(next);
+        }, sounds[next].time);
+      } else {
+        stopPlaying();
+      }
     }
+
+    // sound.addEventListener("ended", function soundPlayer() {
+    //   playNextSound(index + 1);
+    //   sound.removeEventListener("ended", soundPlayer);
+    // });
+  } else {
+    stopPlaying();
   }
 
-  playSound(sounds[index]);
+  //recording has finished
+  // console.log("index", index);
+  // if (index == sounds.length) {
 
-  sounds[index].addEventListener("ended", function soundPlayer() {
-    playNextSound(index + 1);
-    sounds[index].removeEventListener("ended", soundPlayer);
-  });
+  // }
 }
 
 function randomColor() {
