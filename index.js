@@ -28,6 +28,39 @@
     e.target.style.borderColor = "#fdfdfd";
   }
 
+  function alert() {
+    alertNode.style.display = "block";
+
+    setTimeout(function clearAlert() {
+      alertNode.style.display = "none";
+    }, 1000);
+  }
+
+  function randomColor() {
+    let red, green, blue;
+    red = Math.floor(Math.random() * 256);
+    green = Math.floor(Math.random() * 256);
+    blue = Math.floor(Math.random() * 256);
+    return `rgb(${red},${green},${blue})`;
+  }
+
+  function formatCount(seconds) {
+    const recordTime = document.querySelector(".recordTime");
+
+    if (seconds > 60) {
+      let minutes = Math.floor(seconds / 60);
+      seconds -= minutes * 60;
+
+      seconds > 9
+        ? (recordTime.textContent = `${minutes}:${seconds}`)
+        : (recordTime.textContent = `${minutes}:0${seconds}`);
+    } else {
+      seconds > 9
+        ? (recordTime.textContent = `0:${seconds}`)
+        : (recordTime.textContent = `0:0${seconds}`);
+    }
+  }
+
   function loop() {
     isLooping = !isLooping;
     loopButton.classList.add("looping");
@@ -99,14 +132,6 @@
     sounds.length = 0;
   }
 
-  function alert() {
-    alertNode.style.display = "block";
-
-    setTimeout(function clearAlert() {
-      alertNode.style.display = "none";
-    }, 1000);
-  }
-
   function stopPlaying() {
     clearInterval(updateTime);
     isPlaying = false;
@@ -118,23 +143,6 @@
         playText.textContent = "Playback:";
       }, 1000);
     }, 1000);
-  }
-
-  function formatCount(seconds) {
-    const recordTime = document.querySelector(".recordTime");
-
-    if (seconds > 60) {
-      let minutes = Math.floor(seconds / 60);
-      seconds -= minutes * 60;
-
-      seconds > 9
-        ? (recordTime.textContent = `${minutes}:${seconds}`)
-        : (recordTime.textContent = `${minutes}:0${seconds}`);
-    } else {
-      seconds > 9
-        ? (recordTime.textContent = `0:${seconds}`)
-        : (recordTime.textContent = `0:0${seconds}`);
-    }
   }
 
   function playSound(e, time) {
@@ -195,16 +203,7 @@
     }
   }
 
-  function randomColor() {
-    let red, green, blue;
-    red = Math.floor(Math.random() * 256);
-    green = Math.floor(Math.random() * 256);
-    blue = Math.floor(Math.random() * 256);
-    return `rgb(${red},${green},${blue})`;
-  }
-
-  /* Events */
-  window.addEventListener("keydown", function(e) {
+  function startSound(e) {
     now = Date.now();
     if (last) {
       time = now - last;
@@ -214,7 +213,11 @@
 
     last = now;
     playSound(e, time);
-  });
+  }
+
+  /* Events */
+  window.addEventListener("keydown", startSound);
+  keys.forEach(key => key.addEventListener("touchstart", startSound));
 
   playButton.addEventListener("click", playRecording);
   resetButton.addEventListener("click", clearRecording);
