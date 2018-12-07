@@ -7,6 +7,9 @@ const resetButton = document.querySelector(".reset");
 const recordButton = document.querySelector(".record");
 const loopButton = document.querySelector(".loop");
 const recordTime = document.querySelector(".recordTime");
+const playText = document.querySelector(".playText");
+const alertNode = document.querySelector(".alert");
+
 let isPlaying = false;
 let isRecording = false;
 let isLooping = false;
@@ -87,6 +90,7 @@ function playRecording() {
         counter++;
         formatCount(counter);
       }, 1000);
+      playText.textContent = "Stop Playback:";
 
       let sound = sounds[start].audio;
 
@@ -96,12 +100,27 @@ function playRecording() {
       setTimeout(function() {
         playNextSound(next);
       }, sounds[next].time);
+    } else {
+      playText.textContent = "Playback:";
     }
+  } else {
+    alert();
   }
 }
 
 function clearRecording() {
+  if (!isRecording && sounds.length == 0) {
+    alert();
+  }
   sounds.length = 0;
+}
+
+function alert() {
+  alertNode.style.display = "block";
+
+  setTimeout(function clearAlert() {
+    alertNode.style.display = "none";
+  }, 1000);
 }
 
 function stopPlaying() {
@@ -112,10 +131,9 @@ function stopPlaying() {
 
     setTimeout(function resetTime() {
       recordTime.innerHTML = "0:00";
+      playText.textContent = "Playback:";
     }, 1000);
   }, 1000);
-
-  return;
 }
 
 function formatCount(seconds) {
@@ -126,12 +144,12 @@ function formatCount(seconds) {
     seconds -= minutes * 60;
 
     seconds > 9
-      ? (recordTime.innerHTML = `${minutes}:${seconds}`)
-      : (recordTime.innerHTML = `${minutes}:0${seconds}`);
+      ? (recordTime.textContent = `${minutes}:${seconds}`)
+      : (recordTime.textContent = `${minutes}:0${seconds}`);
   } else {
     seconds > 9
-      ? (recordTime.innerHTML = `0:${seconds}`)
-      : (recordTime.innerHTML = `0:0${seconds}`);
+      ? (recordTime.textContent = `0:${seconds}`)
+      : (recordTime.textContent = `0:0${seconds}`);
   }
 }
 

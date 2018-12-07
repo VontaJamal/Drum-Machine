@@ -22,12 +22,11 @@ body {
 
 .wrapper {
   background: #080808;
-  width: 80%;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   flex-flow: row wrap;
 }
 
@@ -37,6 +36,7 @@ body {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+  flex-basis: 100%;
 }
 
 .key {
@@ -47,13 +47,13 @@ body {
   font-size: 1.5rem;
   text-align: center;
   color: #fdfdfd;
-  width: 30%;
   transition: all 0.07s ease;
+  flex: 0 0 40%;
 }
 
 kbd {
   display: block;
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
 .sound {
@@ -63,7 +63,7 @@ kbd {
 }
 
 .playing {
-  transform: scale(1.1);
+  transform: scale(1.2);
   box-shadow: 0 0 1rem var(--white);
 }
 
@@ -73,13 +73,9 @@ kbd {
   font-size: 1.5rem;
   color: var(--white);
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column;
   justify-content: center;
   align-items: center;
-}
-
-.control {
-  margin: 10px;
 }
 
 .play:hover,
@@ -101,7 +97,8 @@ kbd {
   order: 1;
 }
 
-.recordText {
+.recordText,
+.playText {
   display: inline-block;
 }
 
@@ -109,11 +106,16 @@ h1 {
   width: 100%;
   color: #007ce1;
   text-align: center;
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
 .reset {
   order: 2;
+}
+
+.alert {
+  display: none;
+  color: red;
 }
 
 .looping {
@@ -171,7 +173,7 @@ button:active {
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 550px) {
+@media (min-width: 768px) {
   .keyContainer {
     flex-flow: row wrap;
     justify-content: center;
@@ -179,6 +181,7 @@ button:active {
   }
 
   .key {
+    flex: none;
     width: 10rem;
   }
 
@@ -190,7 +193,16 @@ button:active {
   .full {
     order: 0;
   }
+
+  .control {
+    margin: 10px;
+  }
+
+  h1 {
+    width: 100%;
+    font-size: 3em;
+  }
 }
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: 850px) {
+@media (min-width: 1200px) {
 }
