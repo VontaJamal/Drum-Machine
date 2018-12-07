@@ -217,8 +217,6 @@
 
   /* Events */
   window.addEventListener("keydown", startSound);
-  keys.forEach(key => key.addEventListener("touchstart", startSound));
-
   playButton.addEventListener("click", playRecording);
   resetButton.addEventListener("click", clearRecording);
   recordButton.addEventListener("click", record);
