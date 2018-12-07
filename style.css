@@ -10,6 +10,10 @@ html {
   box-sizing: inherit;
 }
 
+:root {
+  --white: #fdfdfd;
+}
+
 body {
   font-family: "Cabin", Arial, Geneva, sans-serif;
   margin: 0;
@@ -36,7 +40,7 @@ body {
 }
 
 .key {
-  border: 0.4rem solid #fdfdfd;
+  border: 0.4rem solid var(--white);
   border-radius: 0.5rem;
   margin: 1rem;
   padding: 1rem 0.5rem;
@@ -49,18 +53,33 @@ body {
 
 kbd {
   display: block;
+  font-size: 2em;
+}
+
+.sound {
+  text-transform: uppercase;
+  color: #ff00ff;
+  letter-spacing: 2px;
 }
 
 .playing {
   transform: scale(1.1);
-  box-shadow: 0 0 1rem #fdfdfd;
+  box-shadow: 0 0 1rem var(--white);
 }
 
 .controls {
-  width: 100%;
+  width: 60%;
   text-align: center;
   font-size: 1.5rem;
-  color: #fdfdfd;
+  color: var(--white);
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.control {
+  margin: 10px;
 }
 
 .play:hover,
@@ -73,8 +92,28 @@ kbd {
 .loop {
   display: inline-block;
   transition: color 0.3s ease-in-out;
-  color: #fdfdfd;
+  color: var(--white);
   font-size: 0.8em;
+}
+
+.full {
+  width: 100%;
+  order: 1;
+}
+
+.recordText {
+  display: inline-block;
+}
+
+h1 {
+  width: 100%;
+  color: #007ce1;
+  text-align: center;
+  font-size: 3em;
+}
+
+.reset {
+  order: 2;
 }
 
 .looping {
@@ -83,6 +122,27 @@ kbd {
   -webkit-animation: spin 2s linear infinite;
   -moz-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
+}
+
+button {
+  border: solid 1px transparent;
+  border-radius: 4px;
+  font-size: 0.7em;
+  background: red;
+  color: white;
+  padding: 5px;
+  transition: all 150ms ease;
+}
+
+button:active {
+  color: #fff;
+  text-shadow: 0 -1px 0 #444, 0 0 5px #ffd, 0 0 8px #fff;
+  box-shadow: 0 1px 0 #666, 0 2px 0 #444, 0 2px 2px rgba(0, 0, 0, 0.9);
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+
+  -webkit-animation: none;
+  animation: none;
 }
 
 @-moz-keyframes spin {
@@ -110,10 +170,6 @@ kbd {
   }
 }
 
-.recordText {
-  display: inline-block;
-}
-
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 550px) {
   .keyContainer {
@@ -124,6 +180,15 @@ kbd {
 
   .key {
     width: 10rem;
+  }
+
+  .controls {
+    flex-flow: row wrap;
+  }
+
+  .reset,
+  .full {
+    order: 0;
   }
 }
 /* Large devices (large desktops, 1200px and up) */

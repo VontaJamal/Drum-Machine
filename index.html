@@ -22,18 +22,33 @@
   <body>
     <div class="wrapper">
       <div class="keyContainer">
-        <div data-key="65" class="key"><kbd>A</kbd> <span>Boom</span></div>
-        <div data-key="83" class="key"><kbd>S</kbd> <span>Clap</span></div>
-        <div data-key="68" class="key"><kbd>D</kbd> <span>Hihat</span></div>
-        <div data-key="70" class="key"><kbd>F</kbd> <span>Kick</span></div>
-        <div class="controls">
-          Playback: <span class="play">🥁</span>
-          <p class="recordText">Start Recording:</p>
-          <span class="record">🔵</span>
-          <p class="loop"><i class="fas fa-sync"></i></p>
-          <button class="reset">Delete Recording</button>
-          <p>Record Time: <span class="recordTime">0:00</span></p>
+        <h1>DJWS Drum Machine</h1>
+        <div data-key="65" class="key">
+          <kbd>A</kbd> <span class="sound">Boom</span>
         </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd> <span class="sound">Clap</span>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd> <span class="sound">Hihat</span>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd> <span class="sound">Kick</span>
+        </div>
+        <section class="controls">
+          <p class="control">Playback: <span class="play">🥁</span></p>
+
+          <div class="control">
+            <p class="recordText">Start Recording:</p>
+            <span class="record">🔵</span>
+          </div>
+
+          <p class="control">Loop Sound: <i class="fas fa-sync loop"></i></p>
+          <button class="reset control">Delete Recording</button>
+          <p class="full control">
+            Record Time: <span class="recordTime">0:00</span>
+          </p>
+        </section>
       </div>
 
       <audio data-key="65" src="sounds/boom.wav"></audio>

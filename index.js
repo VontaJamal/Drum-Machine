@@ -63,13 +63,13 @@ function record() {
       formatCount(counter);
     }, 1000);
 
-    recordText.innerHTML = "Stop Recording";
-    recordButton.innerHTML = "🔴";
+    recordText.textContent = "Stop Recording:";
+    recordButton.textContent = "🔴";
   } else {
     clearInterval(updateTime);
-    recordText.innerHTML = "Start Recording";
-    recordButton.innerHTML = "🔵";
-    recordTime.innerHTML = "0:00";
+    recordText.textContent = "Start Recording:";
+    recordButton.textContent = "🔵";
+    recordTime.textContent = "0:00";
   }
 }
 
@@ -96,12 +96,6 @@ function playRecording() {
       setTimeout(function() {
         playNextSound(next);
       }, sounds[next].time);
-
-      // sound.addEventListener("ended", function soundPlayer() {
-      //   playNextSound(start + 1);
-
-      //   sound.removeEventListener("ended", soundPlayer);
-      // });
     }
   }
 }
@@ -191,20 +185,9 @@ function playNextSound(index) {
         stopPlaying();
       }
     }
-
-    // sound.addEventListener("ended", function soundPlayer() {
-    //   playNextSound(index + 1);
-    //   sound.removeEventListener("ended", soundPlayer);
-    // });
   } else {
     stopPlaying();
   }
-
-  //recording has finished
-  // console.log("index", index);
-  // if (index == sounds.length) {
-
-  // }
 }
 
 function randomColor() {
