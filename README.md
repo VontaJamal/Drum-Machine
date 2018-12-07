@@ -7,7 +7,7 @@ A simple online drum machine to be used to make a few sounds and to have some fu
 
 # Use Cases
 Press any letters you see onscreen on the keyboard to play the corresponding sound.
-[Drum Machine](https://i.imgur.com/qOMcqyu.gifv)
+![Drum Machine](https://i.imgur.com/qOMcqyu.gifv)
 
 Click the record circle to track your beat and then play the drums to hear what you made!
 
