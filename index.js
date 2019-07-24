@@ -147,7 +147,6 @@
 
   function playSound(e, time) {
     let audio, player;
-
     if (e) {
       audio = document.querySelector(`audio[data-key="${e.keyCode}"]`) || e;
       player =
@@ -204,6 +203,8 @@
   }
 
   function startSound(e) {
+    if (e.charCode === 32) return;
+
     now = Date.now();
     if (last) {
       time = now - last;
@@ -215,8 +216,13 @@
     playSound(e, time);
   }
 
+  function startRecording(e) {
+    e.charCode === 32 ? record() : null;
+  }
+
   /* Events */
   window.addEventListener("keydown", startSound);
+  window.addEventListener("keypress", startRecording);
   playButton.addEventListener("click", playRecording);
   resetButton.addEventListener("click", clearRecording);
   recordButton.addEventListener("click", record);
